@@ -140,6 +140,10 @@ export class OcppClient extends Client {
 		);
 	}
 
+	disconnect() {
+		super.disconnect();
+	}
+
 	on(event: "CancelReservation", listener: (request: UrnOCPPCp220203CancelReservationRequest, cb: (response: UrnOCPPCp220203CancelReservationResponse) => void) => void): this;
 	on(event: "ChangeAvailability", listener: (request: UrnOCPPCp220203ChangeAvailabilityRequest, cb: (response: UrnOCPPCp220203ChangeAvailabilityResponse) => void) => void): this;
 	on(event: "CertificateSigned", listener: (request: UrnOCPPCp220203CertificateSignedRequest, cb: (response: UrnOCPPCp220203CertificateSignedResponse) => void) => void): this;

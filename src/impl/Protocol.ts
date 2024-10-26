@@ -1,4 +1,4 @@
-import WebSocket from "ws";
+import * as ws from "ws";
 import { v4 as uuidv4 } from "uuid";
 import EventEmitter from "events";
 import schemas from "./schemas";
@@ -19,20 +19,27 @@ export class Protocol {
 
 	eventEmitter: EventEmitter;
 
-	socket: WebSocket;
+	socket: WebSocket | ws.WebSocket;
 
 	constructor(
-		eventEmitter: EventEmitter, socket: WebSocket
+		eventEmitter: EventEmitter, socket: WebSocket | ws.WebSocket
 	) {
 		this.eventEmitter = eventEmitter;
 		this.socket = socket;
 		/* istanbul ignore next */
-		this.socket.on(
-			"message",
-			(message) => {
-				this.onMessage(message.toString());
-			}
-		);
+
+    if (socket instanceof WebSocket) {
+      (this.socket as WebSocket).onmessage = (message) => {
+        this.onMessage(message.toString());
+      }
+    } else {
+      (this.socket as ws.WebSocket).on(
+        "message",
+        (message) => {
+          this.onMessage(message.toString());
+        }
+      );
+    }
 	}
 	onMessage(message: string) {
 		try {

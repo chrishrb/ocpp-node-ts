@@ -29,8 +29,8 @@ export class Protocol {
 		/* istanbul ignore next */
 
     if (socket instanceof WebSocket) {
-      (this.socket as WebSocket).onmessage = (message) => {
-        this.onMessage(message.toString());
+      (this.socket as WebSocket).onmessage = (event) => {
+        this.onMessage(event.data.toString());
       }
     } else {
       (this.socket as ws.WebSocket).on(

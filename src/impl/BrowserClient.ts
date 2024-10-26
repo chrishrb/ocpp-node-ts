@@ -1,4 +1,5 @@
 import EventEmitter from "events";
+import { join } from "path";
 import { Protocol } from "./Protocol";
 import { OCPP_PROTOCOL_2_0_1 } from "./schemas";
 
@@ -41,7 +42,7 @@ export class BrowserClient extends EventEmitter {
 	/* istanbul ignore next */
 	protected connect(centralSystemUrl: string) {
 		const ws = new WebSocket(
-			centralSystemUrl + this.getCpId(),
+			join(centralSystemUrl, this.getCpId()),
 			[OCPP_PROTOCOL_2_0_1],
 		);
 
@@ -55,8 +56,10 @@ export class BrowserClient extends EventEmitter {
 			}
 
     ws.onopen = () => {
-      this.setConnection(new Protocol(this, ws));
-      this.emit("connect");
+			if (ws) {
+        this.setConnection(new Protocol(this, ws));
+        this.emit("connect");
+      }
     };
 
     ws.onerror = (err) => {

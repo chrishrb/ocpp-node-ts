@@ -1,5 +1,5 @@
 import EventEmitter from "events";
-import { join } from "path";
+import { join } from "path-browserify";
 import { Protocol } from "./Protocol";
 import { OCPP_PROTOCOL_2_0_1 } from "./schemas";
 

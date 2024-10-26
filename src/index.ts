@@ -5,6 +5,8 @@ export * from "./OcppServer";
 /* istanbul ignore next */
 export * from "./OcppClient";
 /* istanbul ignore next */
+export * from "./OcppBrowserClient";
+/* istanbul ignore next */
 export * from "./OcppClientConnection";
 /* istanbul ignore next */
 export * from "./types";

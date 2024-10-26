@@ -66,4 +66,11 @@ export class BrowserClient extends EventEmitter {
       this.emit("error", err);
     };
 	}
+
+	/* istanbul ignore next */
+	protected disconnect() {
+    this.connection?.socket.close()
+    this.setConnection(null);
+    this.emit("close");
+  }
 }

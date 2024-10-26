@@ -103,4 +103,11 @@ export class Client extends EventEmitter {
 			}
 		);
 	}
+
+	/* istanbul ignore next */
+	protected disconnect() {
+    this.connection?.socket.close()
+    this.setConnection(null);
+    this.emit("close");
+  }
 }

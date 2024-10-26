@@ -77,7 +77,7 @@ export class Protocol {
 	}
 
   public disconnect(): void {
-    this.socket.onclose = null;
+    this.socket.onopen = this.socket.onmessage = this.socket.onerror = this.socket.onclose = null;
     this.socket.close(1000, 'normal');
   }
 

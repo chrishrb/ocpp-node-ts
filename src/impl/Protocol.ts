@@ -76,6 +76,10 @@ export class Protocol {
 		}
 	}
 
+  public disconnect(): void {
+    this.socket.close();
+  }
+
 	public callRequest(
 		request: string, payload: unknown
 	): Promise<unknown> {

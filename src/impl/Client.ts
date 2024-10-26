@@ -106,7 +106,7 @@ export class Client extends EventEmitter {
 
 	/* istanbul ignore next */
 	protected disconnect() {
-    this.connection?.socket.close()
+    this.connection?.disconnect()
     this.setConnection(null);
     this.emit("close");
   }
